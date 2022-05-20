@@ -1,11 +1,30 @@
+#include <stdio.h>
 #include <stdlib.h>
-/* mac用 */
+#include <math.h>
+// mac用
 #include <GLUT/glut.h>
 #include <OpenGL/glu.h>
-// windows用 #include <GL/glut.h>
 
-int winw, winh; // ウィンドウサイズ用の変数
+// -------windows用 -------
+// #include <GL/glut.h>
+// #include <GL/glu.h>
+// ------------------------
+
+int winw, winh;
 int board[8][8]; // 盤面用の変数  
+
+// カメラの位置と注視点の変数
+double EYE_X = 0.0;
+double EYE_Y = -10.0;
+double EYE_Z = 5.0;
+
+const double TARGET_X = 0.0;
+const double TARGET_Y = 0.0;
+const double TARGET_Z = 0.0;
+
+const double UP_X = 0.0;
+const double UP_Y = 1.0;
+const double UP_Z = 0.0;
 
 // 盤面の描画
 void Board()
@@ -44,9 +63,33 @@ void Display()
     gluPerspective(60.0, (double)winw / (double)winh, 0.1, 100.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(0.0, 0.0, 15.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    gluLookAt(
+        EYE_X, EYE_Y, EYE_Z, 
+        TARGET_X, TARGET_Y, TARGET_Z,
+        UP_X, UP_Y, UP_Z
+    );
     Board();
     glutSwapBuffers();
+}
+
+// 十字キーで視点移動
+void mySkey(int key, int x , int y)
+{
+    switch(key){
+        // ↑で真上からの視点に移動
+        case 101:
+            EYE_Y = 0.0;
+            EYE_Z = 10.0;
+            break;
+        // ↓で正面からの視点に移動
+        case 103:
+            EYE_Y = -10.0;
+            EYE_Z = 5.0;
+            break;
+        default:
+            break;
+    }
+	glutPostRedisplay();
 }
 
 void myReshape(int width, int height)
@@ -68,6 +111,7 @@ int main(int argc, char *argv[])
     glutInit(&argc, argv);
     myInit(argv[0]);
     glutReshapeFunc(myReshape);
+    glutSpecialFunc(mySkey);
     glutDisplayFunc(Display);
     glutMainLoop();
     return 0;
