@@ -13,6 +13,7 @@
 
 int winw, winh;
 int board[8][8]; // 盤面用の変数
+int turn_count = 1; // 何ターン目か数える変数
 
 // カメラの位置と注視点の変数
 double EYE_X = 0.0;
@@ -111,44 +112,934 @@ void myReshape(int width, int height)
 }
 
 // マウスクリックで石を置く
+// いい方法が思いつかなかったからかなり雑
 void myMouse(int button, int state, int x, int y)
 {
-	printf(" Mouse\n");
-	printf("x,y = %d %d\n", x, y);
-	printf("button = %d\n", button);
-	printf("state = %d\n", state);
-    if (x > 205 && x < 280){
-        if (y > 130 && y < 205) {
-            board[7][0] = 1;
+    if ((x - 205) / 75 == 0)
+    {
+        if ((y - 130) / 75 == 0)
+        {
+            if (board[7][0] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[7][0] = 1;
+                }
+                else
+                {
+                    board[7][0] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 1)
+        {
+            if (board[6][0] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[6][0] = 1;
+                }
+                else
+                {
+                    board[6][0] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 2)
+        {
+            if (board[5][0] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[5][0] = 1;
+                }
+                else
+                {
+                    board[5][0] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 3)
+        {
+            if (board[4][0] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[4][0] = 1;
+                }
+                else
+                {
+                    board[4][0] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 4)
+        {
+            if (board[3][0] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[3][0] = 1;
+                }
+                else
+                {
+                    board[3][0] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 5)
+        {
+            if (board[2][0] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[2][0] = 1;
+                }
+                else
+                {
+                    board[2][0] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 6)
+        {
+            if (board[1][0] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[1][0] = 1;
+                }
+                else
+                {
+                    board[1][0] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 7)
+        {
+            if (board[0][0] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[0][0] = 1;
+                }
+                else
+                {
+                    board[0][0] = -1;
+                }
+                turn_count += 1;
+            }
         }
     }
-	glutPostRedisplay();
-}
-
-// 十字キーで視点移動
-void mySkey(int key, int x, int y)
-{
-    switch (key)
+    else if ((x - 205) / 75 == 1)
     {
-    // ↑で真上からの視点に移動
-    case 101:
-        EYE_Y += 1.0;
-        EYE_Z += 0.5;
-        UP_Y = 0.0;
-        UP_Z = 1.0;
-        glutPostRedisplay();
-        break;
-    // ↓で正面からの視点に移動
-    case 103:
-        EYE_Y = -10.0;
-        EYE_Z = 5.0;
-        glutPostRedisplay();
-        break;
-    case 'q':
-        exit(1);
-    default:
-        break;
+        if ((y - 130) / 75 == 0)
+        {
+            if (board[7][1] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[7][1] = 1;
+                }
+                else
+                {
+                    board[7][1] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 1)
+        {
+            if (board[6][1] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[6][1] = 1;
+                }
+                else
+                {
+                    board[6][1] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 2)
+        {
+            if (board[5][1] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[5][1] = 1;
+                }
+                else
+                {
+                    board[5][1] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 3)
+        {
+            if (board[4][1] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[4][1] = 1;
+                }
+                else
+                {
+                    board[4][1] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 4)
+        {
+            if (board[3][1] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[3][1] = 1;
+                }
+                else
+                {
+                    board[3][1] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 5)
+        {
+            if (board[2][1] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[2][1] = 1;
+                }
+                else
+                {
+                    board[2][1] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 6)
+        {
+            if (board[1][1] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[1][1] = 1;
+                }
+                else
+                {
+                    board[1][1] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 7)
+        {
+            if (board[0][1] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[0][1] = 1;
+                }
+                else
+                {
+                    board[0][1] = -1;
+                }
+                turn_count += 1;
+            }
+        }
     }
+    else if ((x - 205) / 75 == 2)
+    {
+        if ((y - 130) / 75 == 0)
+        {
+            if (board[7][2] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[7][2] = 1;
+                }
+                else
+                {
+                    board[7][2] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 1)
+        {
+            if (board[6][2] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[6][2] = 1;
+                }
+                else
+                {
+                    board[6][2] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 2)
+        {
+            if (board[5][2] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[5][2] = 1;
+                }
+                else
+                {
+                    board[5][2] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 3)
+        {
+            if (board[4][2] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[4][2] = 1;
+                }
+                else
+                {
+                    board[4][2] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 4)
+        {
+            if (board[3][2] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[3][2] = 1;
+                }
+                else
+                {
+                    board[3][2] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 5)
+        {
+            if (board[2][2] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[2][2] = 1;
+                }
+                else
+                {
+                    board[2][2] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 6)
+        {
+            if (board[1][2] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[1][2] = 1;
+                }
+                else
+                {
+                    board[1][2] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 7)
+        {
+            if (board[0][2] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[0][2] = 1;
+                }
+                else
+                {
+                    board[0][2] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+    }
+    else if ((x - 205) / 75 == 3)
+    {
+        if ((y - 130) / 75 == 0)
+        {
+            if (board[7][3] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[7][3] = 1;
+                }
+                else
+                {
+                    board[7][3] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 1)
+        {
+            if (board[6][3] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[6][3] = 1;
+                }
+                else
+                {
+                    board[6][3] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 2)
+        {
+            if (board[5][3] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[5][3] = 1;
+                }
+                else
+                {
+                    board[5][3] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 5)
+        {
+            if (board[2][3] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[2][3] = 1;
+                }
+                else
+                {
+                    board[2][3] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 6)
+        {
+            if (board[1][3] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[1][3] = 1;
+                }
+                else
+                {
+                    board[1][3] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 7)
+        {
+            if (board[0][3] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[0][3] = 1;
+                }
+                else
+                {
+                    board[0][3] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+    }
+    else if ((x - 205) / 75 == 4)
+    {
+        if ((y - 130) / 75 == 0)
+        {
+            if (board[7][4] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[7][4] = 1;
+                }
+                else
+                {
+                    board[7][4] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 1)
+        {
+            if (board[6][4] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[6][4] = 1;
+                }
+                else
+                {
+                    board[6][4] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 2)
+        {
+            if (board[5][4] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[5][4] = 1;
+                }
+                else
+                {
+                    board[5][4] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 5)
+        {
+            if (board[2][4] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[2][4] = 1;
+                }
+                else
+                {
+                    board[2][4] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 6)
+        {
+            if (board[1][4] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[1][4] = 1;
+                }
+                else
+                {
+                    board[1][4] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 7)
+        {
+            if (board[0][4] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[0][4] = 1;
+                }
+                else
+                {
+                    board[0][4] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+    }
+    else if ((x - 205) / 75 == 5)
+    {
+        if ((y - 130) / 75 == 0)
+        {
+            if (board[7][5] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[7][5] = 1;
+                }
+                else
+                {
+                    board[7][5] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 1)
+        {
+            if (board[6][5] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[6][5] = 1;
+                }
+                else
+                {
+                    board[6][5] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 2)
+        {
+            if (board[5][5] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[5][5] = 1;
+                }
+                else
+                {
+                    board[5][5] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 3)
+        {
+            if (board[4][5] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[4][5] = 1;
+                }
+                else
+                {
+                    board[4][5] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 4)
+        {
+            if (board[3][5] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[3][5] = 1;
+                }
+                else
+                {
+                    board[3][5] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 5)
+        {
+            if (board[2][5] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[2][5] = 1;
+                }
+                else
+                {
+                    board[2][5] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 6)
+        {
+            if (board[1][5] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[1][5] = 1;
+                }
+                else
+                {
+                    board[1][5] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 7)
+        {
+            if (board[0][5] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[0][5] = 1;
+                }
+                else
+                {
+                    board[0][5] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+    }
+    else if ((x - 205) / 75 == 6)
+    {
+        if ((y - 130) / 75 == 0)
+        {
+            if (board[7][6] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[7][6] = 1;
+                }
+                else
+                {
+                    board[7][6] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 1)
+        {
+            if (board[6][6] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[6][6] = 1;
+                }
+                else
+                {
+                    board[6][6] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 2)
+        {
+            if (board[5][6] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[5][6] = 1;
+                }
+                else
+                {
+                    board[5][6] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 3)
+        {
+            if (board[4][6] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[4][6] = 1;
+                }
+                else
+                {
+                    board[4][6] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 4)
+        {
+            if (board[3][6] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[3][6] = 1;
+                }
+                else
+                {
+                    board[3][6] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 5)
+        {
+            if (board[2][6] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[2][6] = 1;
+                }
+                else
+                {
+                    board[2][6] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 6)
+        {
+            if (board[1][6] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[1][6] = 1;
+                }
+                else
+                {
+                    board[1][6] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 7)
+        {
+            if (board[0][6] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[0][6] = 1;
+                }
+                else
+                {
+                    board[0][6] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+    }
+    else if ((x - 205) / 75 == 7)
+    {
+        if ((y - 130) / 75 == 0)
+        {
+            if (board[7][7] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[7][7] = 1;
+                }
+                else
+                {
+                    board[7][7] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 1)
+        {
+            if (board[6][7] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[6][7] = 1;
+                }
+                else
+                {
+                    board[6][7] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 2)
+        {
+            if (board[5][7] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[5][7] = 1;
+                }
+                else
+                {
+                    board[5][7] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 3)
+        {
+            if (board[4][7] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[4][7] = 1;
+                }
+                else
+                {
+                    board[4][7] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 4)
+        {
+            if (board[3][7] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[3][7] = 1;
+                }
+                else
+                {
+                    board[3][7] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 5)
+        {
+            if (board[2][7] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[2][7] = 1;
+                }
+                else
+                {
+                    board[2][7] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 6)
+        {
+            if (board[1][7] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[1][7] = 1;
+                }
+                else
+                {
+                    board[1][7] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+        else if ((y - 130) / 75 == 7)
+        {
+            if (board[0][7] == 0)
+            {
+                if (turn_count % 2 == 0)
+                {
+                    board[0][7] = 1;
+                }
+                else
+                {
+                    board[0][7] = -1;
+                }
+                turn_count += 1;
+            }
+        }
+    }
+    glutPostRedisplay();
 }
 
 void myInit(char *progname)
@@ -167,7 +1058,6 @@ int main(int argc, char *argv[])
     myInit(argv[0]);
     glutReshapeFunc(myReshape);
     glutMouseFunc(myMouse);
-    glutSpecialFunc(mySkey);
     glutDisplayFunc(Display);
     glutMainLoop();
     return 0;
