@@ -31,7 +31,7 @@ double UP_Z = 0.0;
 // 盤面の描画
 void Board()
 {
-    float board[2][4] = {
+    float board_color[2][4] = {
         {1.0f, 1.0f, 1.0f, 1.0f},
         {0.3f, 0.3f, 0.3f, 1.0f}};
     int i, j;
@@ -46,7 +46,7 @@ void Board()
             y = i - 4;
             x = j - 4;
             // i + j　が偶数の時に白，奇数の時に黒を描画
-            glMaterialfv(GL_FRONT, GL_DIFFUSE, board[abs(i + j) % 2]);
+            glMaterialfv(GL_FRONT, GL_DIFFUSE, board_color[abs(i + j) % 2]);
             glVertex3d((double)x, (double)y, 0.0);
             glVertex3d((double)(x + 1), (double)y, 0.0);
             glVertex3d((double)(x + 1), (double)(y + 1), 0.0);
