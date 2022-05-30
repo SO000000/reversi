@@ -12,8 +12,8 @@
 // ------------------------
 
 int winw, winh;
-int board[8][8]; // 盤面用の変数
-int turn_count = 1; // 何ターン目か数える変数
+int board[8][8];    // 盤面用の変数
+int turn_count = 1; // ターン数用の変数
 
 // カメラの位置と注視点の変数
 double EYE_X = 0.0;
@@ -31,7 +31,7 @@ double UP_Z = 0.0;
 // 盤面の描画
 void Board()
 {
-    float board[2][4] = {
+    float board_color[2][4] = {
         {1.0f, 1.0f, 1.0f, 1.0f},
         {0.3f, 0.3f, 0.3f, 1.0f}};
     int i, j;
@@ -46,7 +46,7 @@ void Board()
             y = i - 4;
             x = j - 4;
             // i + j　が偶数の時に白，奇数の時に黒を描画
-            glMaterialfv(GL_FRONT, GL_DIFFUSE, board[abs(i + j) % 2]);
+            glMaterialfv(GL_FRONT, GL_DIFFUSE, board_color[abs(i + j) % 2]);
             glVertex3d((double)x, (double)y, 0.0);
             glVertex3d((double)(x + 1), (double)y, 0.0);
             glVertex3d((double)(x + 1), (double)(y + 1), 0.0);
@@ -61,6 +61,12 @@ void Display()
     // 石の色
     float white[4] = {1.0f, 1.0f, 1.0f, 1.0f};
     float black[4] = {0.0f, 0.0f, 0.0f, 1.0f};
+
+    if (turn_count == 1)
+    {
+        board[3][4] = board[4][3] = 1;
+        board[3][3] = board[4][4] = -1;
+    }
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
@@ -109,6 +115,57 @@ void myReshape(int width, int height)
     winw = width;
     winh = height;
     glViewport(0, 0, winw, winh);
+}
+
+// 石をひっくり返す処理
+// バグあり
+void Reverse()
+{
+    int i, j, k, l, m;
+    for (i = 0; i < 8; i++)
+    {
+        for (j = 0; j < 8; j++)
+        {
+            if (board[i][j] == 1)
+            {
+                for (k = -1; k <= 1; k++)
+                {
+                    for (l = -1; l <= 1; l++)
+                    {
+                        if (board[i + k][j + l] == -1)
+                        {
+                            for (m = 1; m < 7; m++)
+                            {
+                                if (board[i + m * k][j + m * l] == 1)
+                                {
+                                    board[i + k][j + l] = 1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (board[i][j] == -1)
+            {
+                for (k = -1; k <= 1; k++)
+                {
+                    for (l = -1; l <= 1; l++)
+                    {
+                        if (board[i + k][j + l] == 1)
+                        {
+                            for (m = 1; m < 7; m++)
+                            {
+                                if (board[i + m * k][j + m * l] == -1)
+                                {
+                                    board[i + k][j + l] = -1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 // マウスクリックで石を置く
@@ -1039,6 +1096,7 @@ void myMouse(int button, int state, int x, int y)
             }
         }
     }
+    Reverse();
     glutPostRedisplay();
 }
 
@@ -1052,8 +1110,6 @@ void myInit(char *progname)
 
 int main(int argc, char *argv[])
 {
-    board[3][4] = board[4][3] = 1;
-    board[3][3] = board[4][4] = -1;
     glutInit(&argc, argv);
     myInit(argv[0]);
     glutReshapeFunc(myReshape);
