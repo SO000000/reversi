@@ -12,8 +12,8 @@
 // ------------------------
 
 int winw, winh;
-int board[8][8]; // 盤面用の変数
-int turn_count = 1; // 何ターン目か数える変数
+int board[8][8];    // 盤面用の変数
+int turn_count = 1; // ターン数用の変数
 
 // カメラの位置と注視点の変数
 double EYE_X = 0.0;
@@ -109,6 +109,56 @@ void myReshape(int width, int height)
     winw = width;
     winh = height;
     glViewport(0, 0, winw, winh);
+}
+
+
+void Reverse()
+{
+    int i, j, k, l, m;
+    for (i = 0; i < 8; i++)
+    {
+        for (j = 0; j < 8; j++)
+        {
+            if (board[i][j] == 1)
+            {
+                for (k = -1; k <= 1; k++)
+                {
+                    for (l = -1; l <= 1; l++)
+                    {
+                        if (board[i + k][j + l] == -1)
+                        {
+                            for (m = 1; m < 7; m++)
+                            {
+                                if (board[i + m * k][j + m * l] == 1)
+                                {
+                                    board[i + k][j + l] = 1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (board[i][j] == -1)
+            {
+                for (k = -1; k <= 1; k++)
+                {
+                    for (l = -1; l <= 1; l++)
+                    {
+                        if (board[i + k][j + l] == 1)
+                        {
+                            for (m = 1; m < 7; m++)
+                            {
+                                if (board[i + m * k][j + m * l] == -1)
+                                {
+                                    board[i + k][j + l] = -1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 // マウスクリックで石を置く
@@ -1039,6 +1089,7 @@ void myMouse(int button, int state, int x, int y)
             }
         }
     }
+    Reverse();
     glutPostRedisplay();
 }
 
@@ -1052,8 +1103,11 @@ void myInit(char *progname)
 
 int main(int argc, char *argv[])
 {
-    board[3][4] = board[4][3] = 1;
-    board[3][3] = board[4][4] = -1;
+    if (turn_count == 1)
+    {
+        board[3][4] = board[4][3] = 1;
+        board[3][3] = board[4][4] = -1;
+    }
     glutInit(&argc, argv);
     myInit(argv[0]);
     glutReshapeFunc(myReshape);
