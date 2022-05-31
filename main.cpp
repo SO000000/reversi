@@ -111,59 +111,10 @@ void myReshape(int width, int height)
     glViewport(0, 0, winw, winh);
 }
 
-void Reverse()
-{
-    int i, j, k, l, m;
-    for (i = 0; i < 8; i++)
-    {
-        for (j = 0; j < 8; j++)
-        {
-            if (board[i][j] == 1)
-            {
-                for (k = -1; k <= 1; k++)
-                {
-                    for (l = -1; l <= 1; l++)
-                    {
-                        if (board[i + k][j + l] == -1)
-                        {
-                            for (m = 1; m < 7; m++)
-                            {
-                                if (board[i + m * k][j + m * l] == 1)
-                                {
-                                    board[i + k][j + l] = 1;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if (board[i][j] == -1)
-            {
-                for (k = -1; k <= 1; k++)
-                {
-                    for (l = -1; l <= 1; l++)
-                    {
-                        if (board[i + k][j + l] == 1)
-                        {
-                            for (m = 1; m < 7; m++)
-                            {
-                                if (board[i + m * k][j + m * l] == -1)
-                                {
-                                    board[i + k][j + l] = -1;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
 // マウスクリックで石を置く
-// いい方法が思いつかなかったからかなり雑
 void myMouse(int button, int state, int x, int y)
 {
+    int i, j, k, l, m;
     if (board[7 - (y - 130) / 75][(x - 205) / 75] == 0)
     {
         if (turn_count % 2 == 0)
@@ -174,9 +125,25 @@ void myMouse(int button, int state, int x, int y)
         {
             board[7 - (y - 130) / 75][(x - 205) / 75] = -1;
         }
+        // 石をひっくり返す処理
+        for (i = -1; i <= 1; i++)
+                {
+                    for (j = -1; j <= 1; j++)
+                    {
+                        if (board[7 - (y - 130) / 75 + i][(x - 205) / 75 + j] != board[7 - (y - 130) / 75][(x - 205) / 75])
+                        {
+                            for (k = 1; k < 7; k++)
+                            {
+                                if (board[7 - (y - 130) / 75 + k * i][(x - 205) / 75 + k * j] == board[7 - (y - 130) / 75][(x - 205) / 75])
+                                {
+                                    board[7 - (y - 130) / 75 + i][(x - 205) / 75 + j] = board[7 - (y - 130) / 75][(x - 205) / 75];
+                                }
+                            }
+                        }
+                    }
+                }
         turn_count += 1;
     }
-    Reverse();
     glutPostRedisplay();
 }
 
@@ -190,6 +157,7 @@ void myInit(char *progname)
 
 int main(int argc, char *argv[])
 {
+    // 初期配置
     if (turn_count == 1)
     {
         board[3][4] = board[4][3] = 1;
