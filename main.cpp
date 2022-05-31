@@ -114,7 +114,7 @@ void myReshape(int width, int height)
 // マウスクリックで石を置く
 void myMouse(int button, int state, int x, int y)
 {
-    int i, j, k, l, m;
+    int i, j, k;
     if (board[7 - (y - 130) / 75][(x - 205) / 75] == 0)
     {
         if (turn_count % 2 == 0)
@@ -127,21 +127,21 @@ void myMouse(int button, int state, int x, int y)
         }
         // 石をひっくり返す処理
         for (i = -1; i <= 1; i++)
+        {
+            for (j = -1; j <= 1; j++)
+            {
+                if (board[7 - (y - 130) / 75 + i][(x - 205) / 75 + j] != board[7 - (y - 130) / 75][(x - 205) / 75] && board[7 - (y - 130) / 75 + i][(x - 205) / 75 + j] != 0)
                 {
-                    for (j = -1; j <= 1; j++)
+                    for (k = 2; k < 8; k++)
                     {
-                        if (board[7 - (y - 130) / 75 + i][(x - 205) / 75 + j] != board[7 - (y - 130) / 75][(x - 205) / 75])
+                        if (board[7 - (y - 130) / 75 + k * i][(x - 205) / 75 + k * j] == board[7 - (y - 130) / 75][(x - 205) / 75])
                         {
-                            for (k = 1; k < 7; k++)
-                            {
-                                if (board[7 - (y - 130) / 75 + k * i][(x - 205) / 75 + k * j] == board[7 - (y - 130) / 75][(x - 205) / 75])
-                                {
-                                    board[7 - (y - 130) / 75 + i][(x - 205) / 75 + j] = board[7 - (y - 130) / 75][(x - 205) / 75];
-                                }
-                            }
+                            board[7 - (y - 130) / 75 + i][(x - 205) / 75 + j] = board[7 - (y - 130) / 75][(x - 205) / 75];
                         }
                     }
                 }
+            }
+        }
         turn_count += 1;
     }
     glutPostRedisplay();
