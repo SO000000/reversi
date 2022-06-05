@@ -1,1 +1,2 @@
 # reversi
+OpenGLを用いて制作したしたリバーシ
